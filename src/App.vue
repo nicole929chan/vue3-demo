@@ -1,10 +1,10 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import EventList from './components/EventList.vue'
 </script>
 
 <template>
   <main>
-    <HelloWorld />
+    <EventList />
   </main>
 </template>
 
