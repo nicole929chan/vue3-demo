@@ -1,10 +1,10 @@
 <script setup>
-import EventList from './components/EventList.vue'
+import AlbumList from './components/AlbumList.vue'
 </script>
 
 <template>
   <main>
-    <EventList />
+    <AlbumList />
   </main>
 </template>
 
