@@ -1,10 +1,12 @@
 <script setup>
 import AlbumList from './components/AlbumList.vue'
+import ShallowZone from './components/ShallowZone.vue'
 </script>
 
 <template>
   <main>
     <AlbumList />
+    <ShallowZone />
   </main>
 </template>
 
