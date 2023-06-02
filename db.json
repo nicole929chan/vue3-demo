@@ -1,0 +1,198 @@
+{
+  "events": [
+    {
+      "event_id": 1,
+      "name": "Summer Festival",
+      "description": "Join us for a fun-filled summer festival with live music, food stalls, and exciting games!",
+      "start_date": "2023-06-01",
+      "end_date": "2023-06-03",
+      "type": "short period",
+      "redemption_start_date": "2023-06-04",
+      "redemption_end_date": "2023-06-10"
+    },
+    {
+      "event_id": 2,
+      "name": "Annual Conference",
+      "description": "Attend our annual conference featuring keynote speeches, workshops, and networking opportunities.",
+      "start_date": "2023-06-10",
+      "end_date": "2023-06-20",
+      "type": "regular period",
+      "redemption_start_date": "2023-06-21",
+      "redemption_end_date": "2023-06-30"
+    },
+    {
+      "event_id": 3,
+      "name": "Music Concert",
+      "description": "Experience the magic of live music performances by popular artists in this thrilling music concert.",
+      "start_date": "2023-06-15",
+      "end_date": "2023-06-17",
+      "type": "short period",
+      "redemption_start_date": "2023-06-18",
+      "redemption_end_date": "2023-06-25"
+    },
+    {
+      "event_id": 4,
+      "name": "Summer Sale",
+      "description": "Enjoy huge discounts and special offers on a wide range of products during our month-long summer sale.",
+      "start_date": "2023-07-01",
+      "end_date": "2023-07-31",
+      "type": "regular period",
+      "redemption_start_date": "2023-07-31",
+      "redemption_end_date": "2023-08-15"
+    }
+  ],
+  "prizes": [
+    {
+      "prize_id": 1,
+      "event_id": 1,
+      "name": "Gift Card",
+      "points_required": 50,
+      "photo": "https://example.com/giftcard.jpg"
+    },
+    {
+      "prize_id": 2,
+      "event_id": 1,
+      "name": "T-shirt",
+      "points_required": 30,
+      "photo": "https://example.com/tshirt.jpg"
+    },
+    {
+      "prize_id": 3,
+      "event_id": 2,
+      "name": "Headphones",
+      "points_required": 100,
+      "photo": "https://example.com/headphones.jpg"
+    },
+    {
+      "prize_id": 4,
+      "event_id": 2,
+      "name": "Mug",
+      "points_required": 20,
+      "photo": "https://example.com/mug.jpg"
+    },
+    {
+      "prize_id": 5,
+      "event_id": 3,
+      "name": "Concert Tickets",
+      "points_required": 80,
+      "photo": "https://example.com/concerttickets.jpg"
+    },
+    {
+      "prize_id": 6,
+      "event_id": 3,
+      "name": "Poster",
+      "points_required": 10,
+      "photo": "https://example.com/poster.jpg"
+    },
+    {
+      "prize_id": 7,
+      "event_id": 4,
+      "name": "Vacation Package",
+      "points_required": 150,
+      "photo": "https://example.com/vacationpackage.jpg"
+    },
+    {
+      "prize_id": 8,
+      "event_id": 4,
+      "name": "Water Bottle",
+      "points_required": 15,
+      "photo": "https://example.com/waterbottle.jpg"
+    }
+  ],
+  "users": [
+    {
+      "user_id": 1,
+      "name": "John",
+      "points": 40
+    },
+    {
+      "user_id": 2,
+      "name": "Alice",
+      "points": 90
+    },
+    {
+      "user_id": 3,
+      "name": "Michael",
+      "points": 20
+    },
+    {
+      "user_id": 4,
+      "name": "Emily",
+      "points": 130
+    }
+  ],
+  "points": [
+    {
+      "point_id": 1,
+      "user_id": 1,
+      "event_id": 1,
+      "points_earned": 20,
+      "timestamp": "2023-06-02T10:30:00Z"
+    },
+    {
+      "point_id": 2,
+      "user_id": 1,
+      "event_id": 2,
+      "points_earned": 50,
+      "timestamp": "2023-06-12T14:45:00Z"
+    },
+    {
+      "point_id": 3,
+      "user_id": 2,
+      "event_id": 1,
+      "points_earned": 30,
+      "timestamp": "2023-06-03T09:15:00Z"
+    },
+    {
+      "point_id": 4,
+      "user_id": 3,
+      "event_id": 3,
+      "points_earned": 10,
+      "timestamp": "2023-06-16T16:20:00Z"
+    },
+    {
+      "point_id": 5,
+      "user_id": 4,
+      "event_id": 4,
+      "points_earned": 40,
+      "timestamp": "2023-07-10T11:00:00Z"
+    }
+  ],
+  "gifts": [
+    {
+      "gift_id": 1,
+      "user_id": 1,
+      "prize_id": 1,
+      "points_redeemed": 50,
+      "timestamp": "2023-06-10T15:20:00Z"
+    },
+    {
+      "gift_id": 2,
+      "user_id": 1,
+      "prize_id": 4,
+      "points_redeemed": 20,
+      "timestamp": "2023-06-15T09:45:00Z"
+    },
+    {
+      "gift_id": 3,
+      "user_id": 2,
+      "prize_id": 3,
+      "points_redeemed": 100,
+      "timestamp": "2023-06-25T14:30:00Z"
+    },
+    {
+      "gift_id": 4,
+      "user_id": 3,
+      "prize_id": 6,
+      "points_redeemed": 10,
+      "timestamp": "2023-06-30T11:55:00Z"
+    },
+    {
+      "gift_id": 5,
+      "user_id": 4,
+      "prize_id": 7,
+      "points_redeemed": 150,
+      "timestamp": "2023-07-15T16:10:00Z"
+    }
+  ]
+}

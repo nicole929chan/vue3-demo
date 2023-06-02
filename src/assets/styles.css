@@ -1,0 +1,90 @@
+/* 色系 */
+.bg-white {
+  background: #fff;
+}
+.bg-primary {
+  background: #f5f4ef;
+}
+.bg-100 {
+  background: #ece9e2;
+}
+.bg-200 {
+  background: #cec8bc;
+}
+.bg-300 {
+  background: #bbaf95;
+}
+.bg-400 {
+  background: #8c8477;
+}
+.text-black {
+  color: #2d2f30;
+}
+.text-white {
+  color: #fff;
+}
+.text-primary {
+  color: #f5f4ef;
+}
+.text-100 {
+  color: #ece9e2;
+}
+.text-200 {
+  color: #cec8bc;
+}
+.text-300 {
+  color: #bbaf95;
+}
+.text-400 {
+  color: #8c8477;
+}
+.text-100_ {
+  color: #eaeaea;
+}
+.text-200_ {
+  color: #e7e4e2;
+}
+.text-300_ {
+  color: #b1ada9;
+}
+.text-400_ {
+  color: #3f352c;
+}
+.text-500_ {
+  color: #2c2c2c;
+}
+.border-400 {
+  border: 1px solid #8c8477;
+}
+
+#event-list {
+  background-image: url(./images/bg1.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.container {
+  padding-top: 200px;
+}
+
+/* 按鈕 */
+.btn {
+  height: 22px;
+  width: 200px;
+  border-radius: 47px;
+  padding: 11px 10px 11px 10px;
+  text-align: center;
+  border: 1px solid #8c8477;
+  letter-spacing: 2px;
+}
+.btn-primary {
+  /* 暗底白字 */
+  color: #fff;
+  background-color: #8c8477;
+}
+.btn-bright {
+  /* 亮底黑字 */
+  color: #8c8477;
+  background-color: #fff;
+}
