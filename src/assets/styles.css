@@ -64,10 +64,6 @@
   height: 100vh;
 }
 
-.container {
-  padding-top: 200px;
-}
-
 /* 按鈕 */
 .btn {
   height: 22px;
@@ -87,4 +83,50 @@
   /* 亮底黑字 */
   color: #8c8477;
   background-color: #fff;
+}
+/* width */
+.w-100 {
+  width: 100%;
+}
+/* margin */
+.mt-12 {
+  margin-top: 12px;
+}
+.mt-14 {
+  margin-top: 14px;
+}
+/* flex */
+.d-flex {
+  display: flex;
+}
+.flex-row {
+  flex-direction: row;
+}
+.flex-column {
+  flex-direction: column;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.justify-around {
+  justify-content: space-around;
+}
+.justify-end {
+  justify-content: end;
+}
+.align-center {
+  align-items: center;
+}
+/* align */
+.text-center {
+  text-align: center;
 }

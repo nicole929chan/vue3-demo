@@ -6,40 +6,29 @@ export default {
     title: 'Hello World',
     events: [],
     gifts: [],
-    loading: false,
-    error: '',
   },
   getters: {
-    loadingStatus(state) {
-      return state.loading;
-    },
-    errorMessage(state) {
-      return state.error
-    },
     eventList(state) {
       return state.events;
     }
   },
   actions: {
     getEvents(context) {
-      context.commit('setDataFetchError', {
-        loading: true,
-        error: 'ABCDE'
-      })
-
-      setTimeout(() => {
-        context.commit('setDataFetchError', {
-          loading: false,
-          error: 'RIVER'
+      context.commit('setLoading', true, { root: true })
+      context.commit('setMessage', '', { root: true })
+      eventApi.getEvents()
+        .then(res => {
+          context.commit('setEvents', res)
         })
-      }, 2000)
+        .catch(err => {
+          context.commit('setMessage', err, { root: true })
+        })
+        .finally(() => {
+          context.commit('setLoading', false, { root: true })
+        })
     }
   },
   mutations: {
-    setDataFetchError(state, payload) {
-      state.loading = payload.loading;
-      state.error = payload.error
-    },
     setEvents(state, events) {
       state.events = events
     },

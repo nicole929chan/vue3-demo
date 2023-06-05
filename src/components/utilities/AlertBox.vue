@@ -7,30 +7,30 @@ export default {
   setup(props, context) {
     const store = useStore();
     const loading = computed(() => {
-      return store.getters['points/loadingStatus']
+      return store.state.loading
     })
-    const error = computed(() => {
-      return store.getters['points/errorMessage']
+    const message = computed(() => {
+      return store.state.message
     })
 
     return {
       loading,
-      error,
+      message,
     }
   }
 }
 </script> 
 <template>
-    <div class="alert">
-        <div>Loading: {{ loading }}</div>
-        <div>Error: {{ error }}</div>
+    <div class="alert" v-if="loading || message">
+        <div v-show="loading">載入中</div>
+        <div v-show="message">{{ message }}</div>
     </div>
 </template>
 <style scoped>
   .alert {
-    margin: 2px;
+    margin: 10px;
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 500;
     color: #3f352c;
     text-align: center;
   }

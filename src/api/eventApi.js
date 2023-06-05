@@ -15,7 +15,7 @@ export default {
 			const res = await client.get('events')
 			return res.data
 		} catch (err) {
-			return err.message
+			throw err.message
 		}
 	},
 }
