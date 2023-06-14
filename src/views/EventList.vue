@@ -9,12 +9,17 @@ export default {
     setup(props, context) {
       const store = useStore();
       store.dispatch("points/getEvents");
+      store.dispatch("points/getGifts");
       const events = computed(() => {
         return store.getters['points/eventList']
       })
+      const gifts = computed(() => {
+        return store.getters['points/giftList']
+      })
 
       return {
-        events
+        events,
+        gifts,
       }
     },
     components: {
@@ -33,7 +38,7 @@ export default {
           <page-button :active="true">活動 {{ events.length }}</page-button>
         </div>
         <div>
-          <page-button :active="false">禮物券</page-button>
+          <page-button :active="false">禮物券 {{ gifts.length }}</page-button>
         </div>
       </div>
       <alert-box></alert-box>

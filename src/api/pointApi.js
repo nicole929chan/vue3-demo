@@ -15,7 +15,15 @@ export default {
 			const res = await client.get('events')
 			return res.data
 		} catch (err) {
-			throw err.message
+			throw `fetching events: ${err.message}`
+		}
+	},
+	async getGifts() {
+		try {
+			const res = await client.get('gifts')
+			return res.data
+		} catch (err) {
+			throw `fetching gifts: ${err.message}`
 		}
 	},
 }
