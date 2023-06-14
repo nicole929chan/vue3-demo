@@ -16,6 +16,21 @@ export default {
     }
   },
   actions: {
+    getEventsAndGifts(context) {
+      context.commit('setLoading', true, { root: true })
+      context.commit('setMessage', '', { root: true })
+      Promise.all([pointApi.getEvents(), pointApi.getGifts()])
+        .then(res => {
+          context.commit('setEvents', res[0])
+          context.commit('setGifts', res[1])
+        })
+        .catch(err => {
+          context.commit('setMessage', err, { root: true })
+        })
+        .finally(() => {
+          context.commit('setLoading', false, { root: true })
+        })
+    },
     getEvents(context) {
       context.commit('setLoading', true, { root: true })
       context.commit('setMessage', '', { root: true })

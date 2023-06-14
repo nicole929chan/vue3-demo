@@ -10,6 +10,7 @@ export default {
       const store = useStore();
       store.dispatch("points/getEvents");
       store.dispatch("points/getGifts");
+      // store.dispatch('points/getEventsAndGifts')
       const events = computed(() => {
         return store.getters['points/eventList']
       })
