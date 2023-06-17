@@ -1,4 +1,5 @@
 import pointApi from "../../api/pointApi";
+import userApi from "../../api/userApi";
 
 export default {
   namespaced: true,
@@ -6,6 +7,7 @@ export default {
     title: 'Hello World',
     events: [],
     gifts: [],
+    user: {}
   },
   getters: {
     eventList(state) {
@@ -13,6 +15,11 @@ export default {
     },
     giftList(state) {
       return state.gifts;
+    },
+    getEventById(state) {
+      return (id) => {
+        return state.events.find(event => event.id === id)
+      }
     }
   },
   actions: {
@@ -48,7 +55,8 @@ export default {
     getGifts(context) {
       context.commit('setLoading', true, { root: true })
       context.commit('setMessage', '', { root: true })
-      pointApi.getGifts()
+      const user_id = context.rootState.user.id
+      pointApi.getGifts({ user_id })
         .then(res => {
           context.commit('setGifts', res)
         })
@@ -57,6 +65,19 @@ export default {
         })
         .finally(() => {
           context.commit('setLoading', false, { root: true })
+        })
+    },
+    getUser(context, user_id) {
+      userApi.getUser(user_id)
+        .then(res => {
+          if (res === undefined) {
+            context.commit('setMessage', 'You\'re not a member.', { root: true })
+          }
+          context.commit('setUser', res)
+        })
+        .catch(err => {
+          console.log(err)
+          context.commit('setMessage', err, { root: true })
         })
     }
   },
@@ -67,5 +88,8 @@ export default {
     setGifts(state, gifts) {
       state.gifts = gifts
     },
+    setUser(state, user) {
+      state.user = user
+    }
   }
 }

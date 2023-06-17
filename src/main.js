@@ -11,4 +11,12 @@ const router = createRouter({
   routes
 })
 
+router.beforeEach((to, from) => {
+  if (to.meta.requiresAuth) {
+    console.log('here need to auth')
+    // 首頁就需要驗證 怎做??
+    return true;
+  }
+})
+
 createApp(App).use(router).use(store).mount('#app')

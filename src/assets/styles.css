@@ -57,6 +57,11 @@
   border: 1px solid #8c8477;
 }
 
+#event-list,
+.container {
+  max-width: 420px;
+}
+
 #event-list {
   background-image: url(./images/bg1.png);
   background-repeat: no-repeat;
@@ -129,4 +134,19 @@
 /* align */
 .text-center {
   text-align: center;
+}
+
+.event-title,
+.gift-title {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0px;
+  padding: 22px 0 0 22px;
+}
+.period {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 22px;
+  padding: 0 0 0 22px;
 }

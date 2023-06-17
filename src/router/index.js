@@ -7,7 +7,10 @@ const routes = [
   {
     name: 'home',
     path: '/',
-    component: EventList
+    component: EventList,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/non-regular-events/:id',

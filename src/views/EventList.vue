@@ -11,6 +11,7 @@ export default {
       store.dispatch("points/getEvents");
       store.dispatch("points/getGifts");
       // store.dispatch('points/getEventsAndGifts')
+      store.dispatch("points/getUser", 23)
       const events = computed(() => {
         return store.getters['points/eventList']
       })

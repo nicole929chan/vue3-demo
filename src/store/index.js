@@ -8,12 +8,18 @@ const store = createStore({
   state: {
     loading: false,
     message: '',
+    user: {
+      id: 3,
+      name: 'Michael'
+    }
   },
   getters: {
     // 
   },
   actions: {
-    // 
+    getUser(context) {
+      // 
+    }
   },
   mutations: {
     setLoading(state, value) {

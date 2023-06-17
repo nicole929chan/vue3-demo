@@ -1,4 +1,5 @@
 <script>
+import { computed, onMounted } from 'vue';
 export default {
   name: 'NonRegularEvent',
   props: {
@@ -8,7 +9,12 @@ export default {
     }
   },
   setup(props, context) {
-    console.log('here ', props)
+    onMounted(() => {
+      console.log('abc');
+    })
+    const event = computed(() => {
+      // 
+    })
   }
 }
 </script>
