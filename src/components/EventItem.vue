@@ -1,5 +1,9 @@
 <script>
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+import pointApi from '../api/pointApi'
+import useReduce from '../hooks/useReduce'
 
 export default {
   name: 'EventItem',
@@ -11,7 +15,10 @@ export default {
   },
   setup(props, context) {
     const router = useRouter()
+    const store = useStore()
     const period = `${props.item.start_date} - ${props.item.end_date}`
+    const reducer = useReduce()
+    const regular = props.item.type === 'regular period' ? true : false;
     function toDetail() {
       router.push({
         name: 'non-regular-event',
@@ -21,9 +28,24 @@ export default {
       })
     }
 
+    onMounted(() => {
+      pointApi.getEarnedPoints({
+        'user_id': store.state.user.id,
+        'event_id': props.item.id
+      })
+        .then(res => {
+          reducer.calculate(res, 'points_earned')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    })
+
     return {
+      regular,
       period,
-      toDetail
+      toDetail,
+      reducer
     }
   }
 }
@@ -33,11 +55,16 @@ export default {
     <div class="event-item text-400_" @click="toDetail">
       <div class="event-title">{{ item.name }}</div>
       <div class="period">{{ period }}</div>
-      <div class="d-flex flex-row justify-end">
-        <span>0</span>
-        <span>/</span>
-        <span>{{ item.points }}</span>
-        <span>點</span>
+      <div class="d-flex flex-row justify-end" style="margin: 20px 20px 0 0;" v-if="regular">
+        <span class="dot">目前點數&nbsp;</span>
+        <span class="points">{{ reducer.total }}</span>
+        <span class="dot">點</span>
+      </div>
+      <div class="d-flex flex-row justify-end" style="margin: 20px 20px 0 0;" v-else>
+        <span class="points">{{ reducer.total }}</span>
+        <span class="points">/</span>
+        <span class="points">{{ item.points }}</span>
+        <span class="dot">點</span>
       </div>
     </div>
   </div>

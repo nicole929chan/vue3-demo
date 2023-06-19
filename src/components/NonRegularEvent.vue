@@ -1,5 +1,6 @@
 <script>
 import { computed, onMounted } from 'vue';
+import { useStore } from 'vuex';
 export default {
   name: 'NonRegularEvent',
   props: {
@@ -9,16 +10,23 @@ export default {
     }
   },
   setup(props, context) {
-    onMounted(() => {
-      console.log('abc');
-    })
+    const store = useStore()
     const event = computed(() => {
-      // 
+      return store.getters['points/getEventById'](parseInt(props.id))
     })
+
+    return {
+      event
+    }
   }
 }
 </script>
 
 <template>
-  <div>non regular event</div>
+  <section>
+    <div class="title">{{ event.name }}</div>
+    <div class="points-area">
+      diamonds
+    </div>
+  </section>
 </template>

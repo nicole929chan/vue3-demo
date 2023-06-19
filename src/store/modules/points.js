@@ -7,7 +7,6 @@ export default {
     title: 'Hello World',
     events: [],
     gifts: [],
-    user: {}
   },
   getters: {
     eventList(state) {

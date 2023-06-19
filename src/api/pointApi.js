@@ -45,4 +45,14 @@ export default {
 			throw `fetching gifts: ${err.message}`
 		}
 	},
+  async getEarnedPoints(args = {}) {
+    try {
+      const res = await clientGet.get('points', {
+        params: args
+      })
+      return res.data
+    } catch (err) {
+      console.log(err)
+    }
+  }
 }
