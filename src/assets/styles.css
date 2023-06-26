@@ -59,7 +59,7 @@
 
 #event-list,
 .container {
-  max-width: 420px;
+  max-width: 400px;
 }
 
 #event-list {
@@ -99,6 +99,13 @@
 }
 .mt-14 {
   margin-top: 14px;
+}
+.mr-12 {
+  margin-right: 12px;
+}
+.mx-14 {
+  margin-left: 14px;
+  margin-right: 14px;
 }
 /* flex */
 .d-flex {
@@ -167,4 +174,27 @@
   font-weight: 400;
   line-height: 30px;
   letter-spacing: 0px;
+}
+
+#points-area {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+#points-area img {
+  margin: 2px;
+}
+
+.event-brief {
+  width: 80%;
+  margin: 22px;
+  padding: 20px;
+  border: 1px solid #b1ada9;
+  border-radius: 20px;
+}
+.event-content {
+  width: 70%;
+  margin: 16px 0 16px 0;
 }

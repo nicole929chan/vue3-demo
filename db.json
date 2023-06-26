@@ -5,10 +5,10 @@
       "name": "Summer Festival",
       "description": "Join us for a fun-filled summer festival with live music, food stalls, and exciting games!",
       "start_date": "2023-06-01",
-      "end_date": "2023-06-03",
+      "end_date": "2023-06-30",
       "type": "short period",
       "redemption_start_date": "2023-06-04",
-      "redemption_end_date": "2023-06-10",
+      "redemption_end_date": "2023-06-30",
       "points": 6
     },
     {
@@ -50,15 +50,15 @@
       "prize_id": 1,
       "event_id": 1,
       "name": "Gift Card",
-      "points_required": 50,
+      "points_required": 6,
       "photo": "https://example.com/giftcard.jpg"
     },
     {
-      "prize_id": 2,
-      "event_id": 1,
-      "name": "T-shirt",
-      "points_required": 30,
-      "photo": "https://example.com/tshirt.jpg"
+      "//prize_id": 2,
+      "//event_id": 1,
+      "//name": "T-shirt",
+      "//points_required": 30,
+      "//photo": "https://example.com/tshirt.jpg"
     },
     {
       "prize_id": 3,
@@ -127,53 +127,74 @@
   ],
   "points": [
     {
-      "point_id": 1,
+      "id": 1,
       "user_id": 1,
       "event_id": 1,
       "points_earned": 20,
       "timestamp": "2023-06-02T10:30:00Z"
     },
     {
-      "point_id": 2,
+      "id": 2,
       "user_id": 1,
       "event_id": 2,
       "points_earned": 50,
       "timestamp": "2023-06-12T14:45:00Z"
     },
     {
-      "point_id": 3,
+      "id": 3,
       "user_id": 2,
       "event_id": 1,
       "points_earned": 30,
       "timestamp": "2023-06-03T09:15:00Z"
     },
     {
-      "point_id": 4,
+      "id": 4,
       "user_id": 3,
       "event_id": 3,
       "points_earned": 10,
       "timestamp": "2023-06-16T16:20:00Z"
     },
     {
-      "point_id": 5,
+      "id": 5,
       "user_id": 4,
       "event_id": 4,
       "points_earned": 40,
       "timestamp": "2023-07-10T11:00:00Z"
     },
     {
-      "point_id": 6,
+      "id": 6,
       "user_id": 3,
       "event_id": 3,
       "points_earned": 3,
       "timestamp": "2023-06-18T16:20:00Z"
     },
     {
-      "point_id": 7,
+      "id": 7,
       "user_id": 3,
       "event_id": 2,
       "points_earned": 1,
       "timestamp": "2023-06-19T16:90:00Z"
+    },
+    {
+      "id": 8,
+      "user_id": 3,
+      "event_id": 1,
+      "points_earned": 2,
+      "timestamp": "2023-06-19T16:90:00Z"
+    },
+    {
+      "id": 9,
+      "user_id": 3,
+      "event_id": 1,
+      "points_earned": 1,
+      "timestamp": "2023-06-20T16:90:00Z"
+    },
+    {
+      "user_id": 3,
+      "event_id": 1,
+      "points_earned": 1,
+      "timestamp": 1687773309405,
+      "id": 10
     }
   ],
   "gifts": [
@@ -212,5 +233,26 @@
       "points_redeemed": 150,
       "timestamp": "2023-07-15T16:10:00Z"
     }
-  ]
+  ],
+  "collection": {
+    "user_id": 3,
+    "event_id": 1,
+    "gifts": [],
+    "points": [
+      {
+        "id": 8,
+        "user_id": 3,
+        "event_id": 1,
+        "points_earned": 2,
+        "timestamp": "2023-06-19T16:90:00Z"
+      },
+      {
+        "id": 9,
+        "user_id": 3,
+        "event_id": 1,
+        "points_earned": 1,
+        "timestamp": "2023-06-20T16:90:00Z"
+      }
+    ]
+  }
 }

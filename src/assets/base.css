@@ -1,4 +1,7 @@
 /* color palette from <https://github.com/vuejs/theme> */
+* {
+  font-family: 'Microsoft JhengHei';
+}
 html,
 body,
 section,
@@ -9,6 +12,10 @@ div {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+}
+
+body {
+  background-color: #f5f4ef;
 }
 
 section {
