@@ -66,21 +66,21 @@ export default {
       console.log(err)
     }
   },
-  async getCollection(args = {}) {
+  async accumulate(user_id, event_id) {
     try {
-      const res = await clientGet.get('collection', {
-        params: args
+      let points_earned = 1
+      let timestamp = Date.now()
+      const res = await clientPost.post('points', {
+        user_id,
+        event_id,
+        points_earned,
+        timestamp
       })
-      return res.data
-    } catch (err) {
-      console.log(err)
-    }
-  },
-  async accumulate(args = {}) {
-    try {
-      const res = await clientPost.post('points', args)
-      // await clientPost.post(`collection/points?user_id=${args.user_id}&event_id=${args.event_id}`, args)
-      return res.data
+      return {
+        message: '集點成功',
+        statusText: 'OK',
+        ...res.data
+      }
     } catch (err) {
       console.log(err)
     }

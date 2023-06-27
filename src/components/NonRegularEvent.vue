@@ -4,8 +4,10 @@ import { useStore } from 'vuex';
 import pointApi from '../api/pointApi';
 import useReduce from '../hooks/useReduce';
 import BaseButton from '../components/utilities/BaseButton.vue'
+import PointPass from './PointPass.vue';
+import TheRedemption from './TheRedemption.vue';
 import moment from 'moment'
-import axios from 'axios';
+import { useRouter } from 'vue-router';
 export default {
   name: 'NonRegularEvent',
   props: {
@@ -15,23 +17,22 @@ export default {
     }
   },
   components: {
-    BaseButton
+    BaseButton,
+    PointPass,
+    TheRedemption,
   },
   setup(props, context) {
     const store = useStore()
+    const router = useRouter()
     const earnedPoints = ref(null)
     const reducer = useReduce()
     const event = store.getters['points/getEventById'](parseInt(props.id))
-    const collection = ref({})
     const prize = reactive({})
+    const gift = reactive({})
     
     onMounted(() => {
-      pointApi.getPrizes({
-        'event_id': props.id
-      }).then(res => {
-        Object.assign(prize, res[0])
-      })
-      getCollection()
+      getEarnedPoints()
+      getGift()
     })
 
     const iconPath = computed(() => {
@@ -57,15 +58,13 @@ export default {
     })
 
     const canAccumulate = computed(() => {
-      return collection.value.gifts 
-        && collection.value.gifts.length === 0 
+      return Object.keys(gift).length === 0 
         && inPeriod(event.start_date, event.end_date)
         && earnedPoints.value < event.points
     })
 
     const canRedeem = computed(() => {
-      return collection.value.gifts 
-        && collection.value.gifts.length === 0 
+      return Object.keys(gift).length === 0 
         && inPeriod(event.redemption_start_date, event.redemption_end_date)
         && earnedPoints.value >= event.points
     });
@@ -75,30 +74,40 @@ export default {
       return today.isSameOrAfter(start) && today.isSameOrBefore(end)
     }
 
-    async function getCollection() {
+    const toPointPass = () => {
+      router.push({
+        name: 'point-pass',
+        params: {
+          id: props.id
+        }
+      })
+    }
+
+    async function getEarnedPoints() {
       try {
-        const res = await pointApi.getCollection({
+        let res = await pointApi.getEarnedPoints({
           user_id: store.state.user.id,
           event_id: props.id
         })
-        collection.value = res
-        reducer.calculate(res.points, 'points_earned')
+        reducer.calculate(res, 'points_earned')
         earnedPoints.value = reducer.total.value
-      } catch(err) {
-        console.log(err)
+      } catch (err) {
+        console.log(err);
       }
     }
 
-    async function accumulate() {
+    async function getGift() {
       try {
-        let newPoint = {
+        let prizes = await pointApi.getPrizes({
+          event_id: props.id
+        })
+        Object.assign(prize, prizes[0])
+        let gifts = await pointApi.getGifts({
           user_id: store.state.user.id,
-          event_id: parseInt(props.id),
-          points_earned: 1,
-          timestamp: Date.now()
-        }
-        await pointApi.accumulate(newPoint)
-      } catch(err) {
+          prize_id: prizes[0].prize_id
+        })
+        Object.assign(gift, gifts[0])
+      } catch (err) {
         console.log(err)
       }
     }
@@ -110,7 +119,7 @@ export default {
       prize,
       canRedeem,
       canAccumulate,
-      accumulate
+      toPointPass,
     }
   }
 }
@@ -147,7 +156,7 @@ export default {
         </div>
       </div>
     </div>
-    <div v-if="canAccumulate" @click="accumulate">
+    <div v-if="canAccumulate" @click="toPointPass">
       <base-button>點我集點</base-button>
     </div>
     <div v-if="canRedeem">

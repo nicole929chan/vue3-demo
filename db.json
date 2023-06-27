@@ -195,6 +195,20 @@
       "points_earned": 1,
       "timestamp": 1687773309405,
       "id": 10
+    },
+    {
+      "user_id": 3,
+      "event_id": 1,
+      "points_earned": 1,
+      "timestamp": 1687838169308,
+      "id": 11
+    },
+    {
+      "user_id": 3,
+      "event_id": 1,
+      "points_earned": 1,
+      "timestamp": 1687839981008,
+      "id": 12
     }
   ],
   "gifts": [
@@ -233,26 +247,5 @@
       "points_redeemed": 150,
       "timestamp": "2023-07-15T16:10:00Z"
     }
-  ],
-  "collection": {
-    "user_id": 3,
-    "event_id": 1,
-    "gifts": [],
-    "points": [
-      {
-        "id": 8,
-        "user_id": 3,
-        "event_id": 1,
-        "points_earned": 2,
-        "timestamp": "2023-06-19T16:90:00Z"
-      },
-      {
-        "id": 9,
-        "user_id": 3,
-        "event_id": 1,
-        "points_earned": 1,
-        "timestamp": "2023-06-20T16:90:00Z"
-      }
-    ]
-  }
+  ]
 }

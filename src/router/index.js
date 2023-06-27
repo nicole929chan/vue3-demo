@@ -3,6 +3,7 @@ import EventLayout from '../views/EventLayout.vue'
 import NonRegularEvent from '../components/NonRegularEvent.vue'
 import RegularEvent from '../components/RegularEvent.vue'
 import RegularEventRedeeming from '../components/RegularEventRedeeming.vue'
+import PointPass from '../components/PointPass.vue'
 const routes = [
   {
     name: 'home',
@@ -42,6 +43,18 @@ const routes = [
         path: 'redeeming',
         component: RegularEventRedeeming,
         props: true,
+      }
+    ]
+  },
+  {
+    path: '/point-pass/:id',
+    component: EventLayout,
+    children: [
+      {
+        name: 'point-pass',
+        path: '',
+        component: PointPass,
+        props: true
       }
     ]
   },
