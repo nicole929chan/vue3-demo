@@ -1,9 +1,10 @@
 <script>
-import { computed, onMounted, ref, reactive, watchEffect } from 'vue';
+import { computed, onMounted, ref, reactive, watch } from 'vue';
 import { useStore } from 'vuex';
 import pointApi from '../api/pointApi';
 import useReduce from '../hooks/useReduce';
 import BaseButton from '../components/utilities/BaseButton.vue'
+import MessageBox from '../components/utilities/MessageBox.vue'
 import PointPass from './PointPass.vue';
 import TheRedemption from './TheRedemption.vue';
 import moment from 'moment'
@@ -18,6 +19,7 @@ export default {
   },
   components: {
     BaseButton,
+    MessageBox,
     PointPass,
     TheRedemption,
   },
@@ -29,6 +31,8 @@ export default {
     const event = store.getters['points/getEventById'](parseInt(props.id))
     const prize = reactive({})
     const gift = reactive({})
+    const redeemable = ref(false)
+    const successful = ref(false)
     
     onMounted(() => {
       getEarnedPoints()
@@ -74,6 +78,12 @@ export default {
       return today.isSameOrAfter(start) && today.isSameOrBefore(end)
     }
 
+    watch(successful, (newValue) => {
+      if (newValue) {
+        getGift()
+      }
+    })
+
     const toPointPass = () => {
       router.push({
         name: 'point-pass',
@@ -104,11 +114,24 @@ export default {
         Object.assign(prize, prizes[0])
         let gifts = await pointApi.getGifts({
           user_id: store.state.user.id,
-          prize_id: prizes[0].prize_id
+          prize_id: prizes[0].id
         })
         Object.assign(gift, gifts[0])
       } catch (err) {
         console.log(err)
+      }
+    }
+
+    async function redeem() {
+      try {
+        let newGift = await pointApi.redeem(
+          store.state.user.id,
+          prize.id,
+          event.points
+        )
+        redeemable.value = false
+        successful.value = true
+      } catch(err) {
       }
     }
 
@@ -120,6 +143,9 @@ export default {
       canRedeem,
       canAccumulate,
       toPointPass,
+      redeem,
+      redeemable,
+      successful,
     }
   }
 }
@@ -159,11 +185,33 @@ export default {
     <div v-if="canAccumulate" @click="toPointPass">
       <base-button>點我集點</base-button>
     </div>
-    <div v-if="canRedeem">
+    <div v-if="canRedeem" @click="redeemable = true">
       <base-button>點我兌換</base-button>
     </div>
     <div class="event-content">
       {{ event.description }}
     </div>
+    <message-box v-if="redeemable">
+      <template v-slot:description>
+        <div class="text-center">提醒您</div>
+        <div class="text-center mt-12">點數兌換後即不可回復，點數兌換須由客服人員操作。</div>
+      </template>
+      <template v-slot:buttons>
+        <div>
+          <div @click="redeem">
+            <base-button>兌換</base-button>
+          </div>
+          <div @click="redeemable = false">
+            <base-button type="bright">取消</base-button>
+          </div>
+        </div>
+      </template>
+    </message-box>
+    <message-box v-if="successful">
+      <div class="title">兌換成功</div>
+      <div @click="successful = false">
+        <base-button></base-button>
+      </div>
+    </message-box>
   </section>
 </template>

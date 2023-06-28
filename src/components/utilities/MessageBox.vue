@@ -1,12 +1,6 @@
 <script>
 export default {
   name: 'MessageBox',
-  props: {
-    message: {
-      type: String,
-      default: ''
-    }
-  },
   setup(props, context) {
     // 
   }  

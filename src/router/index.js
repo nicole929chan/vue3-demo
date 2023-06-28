@@ -51,6 +51,7 @@ const routes = [
     component: EventLayout,
     children: [
       {
+        // 集點頁面
         name: 'point-pass',
         path: '',
         component: PointPass,

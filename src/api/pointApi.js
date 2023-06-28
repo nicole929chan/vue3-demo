@@ -84,5 +84,23 @@ export default {
     } catch (err) {
       console.log(err)
     }
+  },
+  async redeem(user_id, prize_id, points_redeemed) {
+    try {
+      let timestamp = Date.now()
+      const res = await clientPost.post('gifts', {
+        user_id,
+        prize_id,
+        points_redeemed,
+        timestamp
+      })
+      return {
+        message: '兌換成功',
+        statusText: 'OK',
+        ...res.data
+      }
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
