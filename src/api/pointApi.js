@@ -68,7 +68,7 @@ export default {
   },
   async accumulate(user_id, event_id) {
     try {
-      let points_earned = 1
+      let points_earned = 7
       let timestamp = Date.now()
       const res = await clientPost.post('points', {
         user_id,

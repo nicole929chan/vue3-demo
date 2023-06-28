@@ -3,11 +3,11 @@ import { computed, onMounted, ref, reactive, watch } from 'vue';
 import { useStore } from 'vuex';
 import pointApi from '../api/pointApi';
 import useReduce from '../hooks/useReduce';
+import usePeriod from '../hooks/usePeriod'
 import BaseButton from '../components/utilities/BaseButton.vue'
 import MessageBox from '../components/utilities/MessageBox.vue'
 import PointPass from './PointPass.vue';
 import TheRedemption from './TheRedemption.vue';
-import moment from 'moment'
 import { useRouter } from 'vue-router';
 export default {
   name: 'NonRegularEvent',
@@ -26,6 +26,7 @@ export default {
   setup(props, context) {
     const store = useStore()
     const router = useRouter()
+    const period = usePeriod()
     const earnedPoints = ref(null)
     const reducer = useReduce()
     const event = store.getters['points/getEventById'](parseInt(props.id))
@@ -63,20 +64,15 @@ export default {
 
     const canAccumulate = computed(() => {
       return Object.keys(gift).length === 0 
-        && inPeriod(event.start_date, event.end_date)
+        && period.between(event.start_date, event.end_date)
         && earnedPoints.value < event.points
     })
 
     const canRedeem = computed(() => {
       return Object.keys(gift).length === 0 
-        && inPeriod(event.redemption_start_date, event.redemption_end_date)
+        && period.between(event.redemption_start_date, event.redemption_end_date)
         && earnedPoints.value >= event.points
     });
-
-    const inPeriod = (start, end) => {
-      const today = moment().startOf('day')
-      return today.isSameOrAfter(start) && today.isSameOrBefore(end)
-    }
 
     watch(successful, (newValue) => {
       if (newValue) {
@@ -146,6 +142,7 @@ export default {
       redeem,
       redeemable,
       successful,
+      period,
     }
   }
 }
@@ -164,14 +161,14 @@ export default {
         <div class="mr-12"><img src="../assets/icons/icon_clock.png" alt=""></div>
         <div class="d-flex flex-column">
           <span class="text-300_">集點期間</span>
-          <span class="text-400_">{{ event.start_date }} - {{ event.end_date }}</span>
+          <span class="text-400_">{{ period.format(event.start_date, event.end_date) }}</span>
         </div>
       </div>
       <div class="d-flex flex-row mt-12">
         <div class="mr-12"><img src="../assets/icons/icon_clock.png" alt=""></div>
         <div class="d-flex flex-column">
           <span class="text-300_">兌換期間</span>
-          <span class="text-400_">{{ event.redemption_start_date }} - {{ event.redemption_end_date }}</span>
+          <span class="text-400_">{{ period.format(event.redemption_start_date, event.redemption_end_date) }}</span>
         </div>
       </div>
       <div class="d-flex flex-row mt-12">

@@ -185,16 +185,9 @@
     {
       "user_id": 3,
       "event_id": 1,
-      "points_earned": 1,
-      "timestamp": 1687917364361,
+      "points_earned": 7,
+      "timestamp": 1687924777991,
       "id": 9
-    },
-    {
-      "user_id": 3,
-      "event_id": 1,
-      "points_earned": 5,
-      "timestamp": 1687919613029,
-      "id": 10
     }
   ],
   "gifts": [
@@ -237,7 +230,7 @@
       "user_id": 3,
       "prize_id": 1,
       "points_redeemed": 6,
-      "timestamp": 1687921878933,
+      "timestamp": 1687924792283,
       "id": 6
     }
   ]
