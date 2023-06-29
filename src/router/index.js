@@ -4,6 +4,7 @@ import NonRegularEvent from '../components/NonRegularEvent.vue'
 import RegularEvent from '../components/RegularEvent.vue'
 import RegularEventRedeeming from '../components/RegularEventRedeeming.vue'
 import PointPass from '../components/PointPass.vue'
+import PointRecords from '../components/PointRecords.vue'
 const routes = [
   {
     name: 'home',
@@ -55,6 +56,19 @@ const routes = [
         name: 'point-pass',
         path: '',
         component: PointPass,
+        props: true
+      }
+    ]
+  },
+  {
+    path: '/records/:id',
+    component: EventLayout,
+    children: [
+      {
+        // 點數紀錄
+        name: 'point-records',
+        path: '',
+        component: PointRecords,
         props: true
       }
     ]

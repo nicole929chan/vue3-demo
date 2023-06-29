@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import pointApi from '../api/pointApi'
 import useReduce from '../hooks/useReduce'
+import usePeriod from '../hooks/usePeriod'
 
 export default {
   name: 'EventItem',
@@ -16,7 +17,7 @@ export default {
   setup(props, context) {
     const router = useRouter()
     const store = useStore()
-    const period = `${props.item.start_date} - ${props.item.end_date}`
+    const period = usePeriod()
     const reducer = useReduce()
     const regular = props.item.type === 'regular period' ? true : false;
     function toDetail() {
@@ -54,7 +55,7 @@ export default {
   <div class="w-100 d-flex flex-column align-center mt-14">
     <div class="event-item text-400_" @click="toDetail">
       <div class="event-title">{{ item.name }}</div>
-      <div class="period">{{ period }}</div>
+      <div class="period">{{ period.format(item.start_date, item.end_date) }}</div>
       <div class="d-flex flex-row justify-end" style="margin: 20px 20px 0 0;" v-if="regular">
         <span class="dot">目前點數&nbsp;</span>
         <span class="points">{{ reducer.total }}</span>

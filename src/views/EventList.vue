@@ -34,6 +34,14 @@ export default {
 </script>
 <template>
   <div id="event-list">
+    <router-link
+      :to="{
+        name: 'point-records',
+        params: {
+          id: 1
+        }
+      }"
+    >活動一點數頁</router-link>
     <section class="container">
       <div class="w-100 d-flex flex-row justify-center">
         <div>
