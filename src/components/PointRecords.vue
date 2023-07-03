@@ -4,6 +4,7 @@ import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import pointApi from '../api/pointApi';
 import useReduce from '../hooks/useReduce';
+import usePeriod from '../hooks/usePeriod';
 export default {
   name: 'PointRecords',
   props: {
@@ -15,10 +16,12 @@ export default {
   setup(props, context) {
     const store = useStore()
     const router = useRouter()
+    const period = usePeriod()
     const event = store.getters['points/getEventById'](parseInt(props.id))
     const _start = ref(0)
-    const _limit = ref(3)
-    const more = ref(0)
+    const _limit = ref(10)
+    const more = ref(true)
+    const lastPosition = ref(0)
     const records = ref([])
     const box = ref(null)
     onMounted(() => {
@@ -34,18 +37,14 @@ export default {
     })
 
     function handleScroll() {
-      console.log('scrollHeight', box.value.scrollHeight)
-      console.log('clientHeight', box.value.clientHeight)
-      console.log('scrollTop', box.value.scrollTop)
       let scrollHeight = box.value.scrollHeight
       let clientHeight = box.value.clientHeight
       let scrollTop = box.value.scrollTop
       if (scrollHeight === clientHeight + scrollTop) {
-        console.log('@@@@@')
-        // more嘗試用計算屬性, 製作getter與setter, 當fetch沒有資料時就不再增加more??
-        more.value++
-        console.log('#######', more.value)
-        getEarnedPoints()
+        if (more.value) 
+        {
+          lastPosition.value++
+        }
       }
     }
 
@@ -65,7 +64,7 @@ export default {
             records.value.push(item)
           })
         } else {
-          readonly(more)
+          more.value = false
         }
       } catch (err) {
         console.log(err);
@@ -74,9 +73,9 @@ export default {
 
     return { 
       event,
-      more,
       records,
-      box, 
+      box,
+      period, 
     }
   }
 }
@@ -95,19 +94,17 @@ export default {
         </div>
         <div class="d-flex flex-column align-center record-item-right">
           <span>信義店</span>
-          <span>{{ record.timestamp }}</span>
+          <span>{{ period.format(record.timestamp) }}</span>
         </div>
       </div>
     </div>
-    <!-- <div class="foo">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. </div> -->
-    
   </section>
 </template>
 <style scoped>
   .record-content {
     min-width: 340px;
     margin: 0 10px;
-    height: 180px;
+    height: 460px;
     overflow-y: scroll;
   }
   .record-item {
@@ -119,12 +116,17 @@ export default {
   }
   .record-item-left {
     border-right: 1px solid #bbaf95;
-    padding: 0 12px;
+    padding: 0 0 0 18px;
+    width: 38%;
   }
   .record-item-right {
     padding-left: 6px;
+    width: 62%;
   }
   img {
     margin-right: 4px;
+  }
+  span {
+    margin-bottom: 4px;
   }
 </style>

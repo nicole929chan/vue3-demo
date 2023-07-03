@@ -7,7 +7,10 @@ export default function () {
       return today.isSameOrAfter(start) && today.isSameOrBefore(end)
     }
 
-    function format(start:string, end:string):string {
+    function format(start:string|number, end:string|number):string {
+      if (end === undefined) {
+        return moment(start).format('YYYY-MM-DD')
+      }
       return moment(start).format('YYYY-MM-DD') + ' ~ ' + moment(end).format('YYYY-MM-DD')
     }
 
